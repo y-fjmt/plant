@@ -5,7 +5,7 @@
 |用途|対応するブランチ|URL|
 | --- |--- | --- |
 |本番環境|`main`|https://main.d1k5hbbkd1zhdq.amplifyapp.com/|
-|開発環境|`develop`|後で書きます|
+|開発環境|`develop`|https://develop.d1k5hbbkd1zhdq.amplifyapp.com|
 
 ## Gitブランチ名の命名規則
 
