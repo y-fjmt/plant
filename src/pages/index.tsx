@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from 'next/link'
+
 
 import { useRecoilState } from "recoil";
 import { LoginState } from "../components/atoms";
@@ -42,11 +44,8 @@ export default function Component() {
   if (session) {
     return (
       <div>
-        {/* <p>HOME</p>
-        <button onClick={() => signOut()}>Sign out</button>
-         */}
         <Sidebar>
-          aaaaa
+          aaaaaqqq
         </Sidebar>
       </div>
     );

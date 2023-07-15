@@ -1,4 +1,7 @@
 import * as React from "react";
+import Link from 'next/link'
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import { useRecoilState } from "recoil";
 import { LoginState } from "../components/atoms";
@@ -47,9 +50,9 @@ const Signin: React.FC<Props> = (props) => {
               />
             </div>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,11 +70,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Home</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/view"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -89,11 +92,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">View</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/edit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,11 +114,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Edit</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/notification"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +136,7 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Notifications</span>
-            </a>
+            </Link>
           </nav>
 
           <div className="mt-6">
@@ -150,6 +153,7 @@ const Signin: React.FC<Props> = (props) => {
               </a>
 
               <a
+                onClick={() => signOut()}
                 href="#"
                 className="text-gray-500 transition-colors duration-200 rtl:rotate-0 hover:text-blue-500 "
               >
@@ -173,7 +177,7 @@ const Signin: React.FC<Props> = (props) => {
         </div>
       </aside>
       <main>
-        <div className="m-3">{props.children}</div>
+        <div className="m-14">{props.children}</div>
       </main>
     </div>
   );
