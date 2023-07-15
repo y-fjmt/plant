@@ -10,6 +10,7 @@ interface FolderListProps {
   title: string;
   content: string;
 }
+
 const FolderList: React.FC<FolderListProps> = ({ title, content }) => {
   return (
     <List
@@ -21,7 +22,11 @@ const FolderList: React.FC<FolderListProps> = ({ title, content }) => {
         mt: 10,
       }}
     >
-      <ListItem>
+      <ListItem
+        sx={{
+          margin: "5px 5px 5px 10px", // 上下に8pxの余白を追加
+        }}
+      >
         <ListItemAvatar>
           <Avatar>
             <ImageIcon />
