@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
+import Button from "@mui/material/Button";
 
 interface FolderListProps {
   title: string;
@@ -33,6 +34,16 @@ const FolderList: React.FC<FolderListProps> = ({ title, content }) => {
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={title} secondary={content} />
+        <Button variant="contained" color="primary" sx={{ width: 100 }}>
+          読む
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          sx={{ width: 100, ml: 3, mr: 5 }}
+        >
+          編集する
+        </Button>
       </ListItem>
     </List>
   );
