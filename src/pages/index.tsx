@@ -1,36 +1,53 @@
 import { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import axios from "axios";
+
+import { useRecoilState } from "recoil";
+import { LoginState } from "../components/atoms";
 
 import Signin from "../components/Signin";
+import Sidebar from "../components/Sidebar";
+import axios from "axios";
 
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT || '';
-console.log(process.env.NEXT_PUBLIC_API_ENDPOIN)
+var hasPost = false;
 
 export default function Component() {
+
   const { data: session } = useSession();
+  const [userInfo, setUserInfo] = useRecoilState(LoginState);
 
   useEffect(() => {
     if (session && typeof session.user !== "undefined") {
-      console.log(session.user);
-
+    
+      setUserInfo({
+        email: session.user.email ?? '', 
+        name: session.user.name ?? '', 
+        icon: session.user.image ?? '', 
+      })
+      
       // ユーザーデータを取得
-      axios
+      if(hasPost == false && userInfo.email != '' && userInfo.name != ''){
+        hasPost = true;
+        axios
         .post("/login", {
-          userId: session.user.email,
-          userName: session.user.name,
+          userId: userInfo.email,
+          userName: userInfo.name,
         })
         .then((res) => {
           console.log(res);
         });
+      }      
     }
   }, [session]);
 
   if (session) {
     return (
       <div>
-        <p>HOME</p>
+        {/* <p>HOME</p>
         <button onClick={() => signOut()}>Sign out</button>
+         */}
+        <Sidebar>
+          aaaaa
+        </Sidebar>
       </div>
     );
   }else{
