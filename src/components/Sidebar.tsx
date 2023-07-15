@@ -18,14 +18,10 @@ import Toolbar from "@mui/material/Toolbar";
 const drawerWidth = 240;
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
-export default function ResponsiveDrawer(props: Props) {
+const ResponsiveDrawer: React.FC<Props> = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -66,8 +62,6 @@ export default function ResponsiveDrawer(props: Props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-
         <Drawer
           variant="permanent"
           sx={{
@@ -92,4 +86,6 @@ export default function ResponsiveDrawer(props: Props) {
       ></Box>
     </Box>
   );
-}
+};
+
+export default ResponsiveDrawer;
