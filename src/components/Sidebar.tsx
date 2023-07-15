@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -14,7 +14,7 @@ const Signin: React.FC<Props> = (props) => {
   const [userInfo, setUserInfo] = useRecoilState(LoginState);
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-gradient-to-br from-blue-200 to-lime-200 border-r rtl:border-r-0 rtl:border-l ">
         <a href="#">
           <img
@@ -176,8 +176,8 @@ const Signin: React.FC<Props> = (props) => {
           </div>
         </div>
       </aside>
-      <main>
-        <div className="m-14">{props.children}</div>
+      <main className="flex-1 m-14">
+        <div>{props.children}</div>
       </main>
     </div>
   );
