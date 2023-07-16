@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 type Props = {
   img: string;
@@ -11,6 +12,11 @@ type Props = {
 
 const Listitem: React.FC<Props> = (props) => {
   const router = useRouter();
+
+  const [isLiked, setIsLiked] = useState(false);
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <div>
@@ -31,13 +37,16 @@ const Listitem: React.FC<Props> = (props) => {
               <p className="text-sm text-gray-500 truncate">{props.auther}</p>
             </div>
           </div>
-          <div className="space-x-2">
+          <div className="space-x-2 ml-150">
             {/* <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-full">
               &nbsp; likes{props.likes} &nbsp;
             </button> */}
-            <label className="bg-emerald-600 text-white font-semibold py-2.5 px-4 rounded-full">
-              &nbsp; いいね 0 &nbsp;
-            </label>
+            <button
+              className="bg-red-500 text-white font-semibold py-2 px-4 mr-1 rounded-full"
+              onClick={handleLikeClick}
+            >
+              &nbsp; いいね {isLiked ? 1 : 0} &nbsp;
+            </button>
             <button
               onClick={() => {
                 router.push(`/article?id=${props.articleId}`);
