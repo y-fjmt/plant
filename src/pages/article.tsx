@@ -237,7 +237,7 @@ const MyComponent = () => {
 						{
 							data2.map((elem, i) => {
 								return (
-									<tr>
+									<tr key={i}>
 										<td><Link href={`/commit?id=${router.query['id']}&pos=${elem.pos}&name=${data1.tags}&owner=${data1.ownUserId}`}>+</Link></td>
 										<td><div className="markdown-body m-5 ">
 											<ReactMarkdown className="p-4">{elem.content}</ReactMarkdown>
@@ -256,7 +256,7 @@ const MyComponent = () => {
 												{
 													elem.selecter.map((op, index) => {
 														return (
-															<option value={index}>
+															<option value={index} key={index}>
 																{op.tags}
 															</option>
 														);

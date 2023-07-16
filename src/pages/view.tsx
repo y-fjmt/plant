@@ -2,7 +2,7 @@ import NotifyList from "../components/NotifyList";
 import Sidebar from "../components/Sidebar";
 import React from "react";
 import Edit from "@/components/Edit";
-import Recommend from "../components/recommend";
+import Recommend from "../components/Recommend";
 
 const MyComponent = () => {
   const handleEditClick = () => {

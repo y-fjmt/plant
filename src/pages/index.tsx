@@ -10,7 +10,7 @@ import Signin from "../components/Signin";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 
-import Recommend from "../components/recommend";
+import Recommend from "../components/Recommend";
 
 var hasPost = false;
 

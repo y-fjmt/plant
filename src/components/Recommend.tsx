@@ -53,8 +53,8 @@ const Recommend: React.FC<EditProps> = () => {
       <div className="mx-3 font-bold text-xl text-gray-600">あなたの記事</div>
       {data1.map((content) => {
         return (
-          <div>
-            <Listitem
+          <div key={content.userIcon}>
+            <Listitem key={content.userIcon}
               img={content.userIcon}
               title={content.tags}
               auther={content.userName}
@@ -69,8 +69,8 @@ const Recommend: React.FC<EditProps> = () => {
       </div>
       {data2.map((content) => {
         return (
-          <div>
-            <Listitem
+          <div key={content.userIcon}>
+            <Listitem  key={content.userIcon}
               img={content.userIcon}
               title={content.tags}
               auther={content.userName}
