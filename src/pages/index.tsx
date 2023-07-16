@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from 'next/link'
+
 
 import { useRecoilState } from "recoil";
 import { LoginState } from "../components/atoms";
@@ -7,6 +9,8 @@ import { LoginState } from "../components/atoms";
 import Signin from "../components/Signin";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
+
+import Recommend from "../components/recommend";
 
 var hasPost = false;
 
@@ -42,11 +46,8 @@ export default function Component() {
   if (session) {
     return (
       <div>
-        {/* <p>HOME</p>
-        <button onClick={() => signOut()}>Sign out</button>
-         */}
         <Sidebar>
-          aaaaa
+          <Recommend/>
         </Sidebar>
       </div>
     );

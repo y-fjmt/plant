@@ -1,4 +1,7 @@
 import * as React from "react";
+import Link from "next/link";
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import { useRecoilState } from "recoil";
 import { LoginState } from "../components/atoms";
@@ -11,14 +14,10 @@ const Signin: React.FC<Props> = (props) => {
   const [userInfo, setUserInfo] = useRecoilState(LoginState);
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-gradient-to-br from-blue-200 to-lime-200 border-r rtl:border-r-0 rtl:border-l ">
         <a href="#">
-          <img
-            className="w-auto h-7"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
-          />
+          <img className="w-auto h-7 ml-5" src="/plant_logo3.PNG" alt="" />
         </a>
 
         <div className="flex flex-col justify-between flex-1 mt-6">
@@ -47,9 +46,9 @@ const Signin: React.FC<Props> = (props) => {
               />
             </div>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,11 +66,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Home</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/view"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -89,11 +88,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">View</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/edit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,11 +110,11 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Edit</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
-              href="#"
+              href="/notification"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +132,7 @@ const Signin: React.FC<Props> = (props) => {
               </svg>
 
               <span className="mx-2 text-sm font-medium">Notifications</span>
-            </a>
+            </Link>
           </nav>
 
           <div className="mt-6">
@@ -150,6 +149,7 @@ const Signin: React.FC<Props> = (props) => {
               </a>
 
               <a
+                onClick={() => signOut()}
                 href="#"
                 className="text-gray-500 transition-colors duration-200 rtl:rotate-0 hover:text-blue-500 "
               >
@@ -172,8 +172,8 @@ const Signin: React.FC<Props> = (props) => {
           </div>
         </div>
       </aside>
-      <main>
-        <div className="m-3">{props.children}</div>
+      <main className="flex-1 m-14">
+        <div>{props.children}</div>
       </main>
     </div>
   );
