@@ -17,11 +17,7 @@ const Signin: React.FC<Props> = (props) => {
     <div className="flex h-screen">
       <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-gradient-to-br from-blue-200 to-lime-200 border-r rtl:border-r-0 rtl:border-l ">
         <a href="#">
-          <img
-            className="w-auto h-7"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
-          />
+          <img className="w-auto h-7" src="../images/plant_logo2.png" alt="" />
         </a>
 
         <div className="flex flex-col justify-between flex-1 mt-6">
