@@ -1,6 +1,9 @@
 import React, { useState, ChangeEvent } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
+
+import { useRouter } from 'next/router'
 
 import axios from "axios";
 
@@ -9,8 +12,13 @@ type EditProps = {
 };
 
 const Edit: React.FC<EditProps> = ({ onClick }) => {
+
+  const { data: session } = useSession();
+
   const [markdownText, setMarkdownText] = useState("");
   const [titileText, setTitleText] = useState("");
+
+  const router = useRouter();
 
   const updateContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdownText(event.target.value);
@@ -28,7 +36,7 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <label
               htmlFor="input-label"
-              className="block text-sm font-bold mb-1 ml-2 dark:text-white"
+              className="block text-sm font-bold mb-1 ml-2"
             >
               タイトル
             </label>
@@ -37,7 +45,7 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
                 <input
                   type="title"
                   id="input-label"
-                  className="py-3 px-4 block w-full sm:w-96 border border-gray-300 border-opacity-50 rounded-md text-sm focus:border-gray-500 focus:ring-gray-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  className="py-3 px-4 block w-full sm:w-96 border border-gray-300 border-opacity-50 rounded-md text-sm focus:border-gray-500 focus:ring-gray-500"
                   placeholder="title"
                   onChange={updateTitle}
                 />
@@ -70,15 +78,22 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
               <button
                 className="m-1 mt-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
                 onClick={() => {
-                  console.log("publish.");
                   axios
                     .post("article", {
                       content: markdownText,
+                      ownUserId: session?.user?.email,
+                      isPublic: true,
+                      tags: titileText,
+                      userName: session?.user?.name,
+                      userIcon: session?.user?.image
                     })
                     .then((res) => {
                       console.log(res.data);
                     });
+                    router.push('/');
+                    alert('記事を投稿しました。')
                 }}
+                
               >
                 投稿
               </button>

@@ -11,11 +11,8 @@ const MyComponent = () => {
 
   return (
     <div>
-      {/* <h1>My Component</h1> */}
-      {/* <Edit onClick={handleEditClick} /> */}
       <Sidebar>
         <div className="">
-          {/* <NotifyList /> */}
           <Edit onClick={handleEditClick} />
         </div>
       </Sidebar>

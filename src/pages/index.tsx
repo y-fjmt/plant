@@ -10,6 +10,8 @@ import Signin from "../components/Signin";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 
+import Recommend from "../components/recommend";
+
 var hasPost = false;
 
 export default function Component() {
@@ -45,7 +47,7 @@ export default function Component() {
     return (
       <div>
         <Sidebar>
-          aaaaaqqq
+          <Recommend/>
         </Sidebar>
       </div>
     );
