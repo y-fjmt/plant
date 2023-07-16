@@ -22,6 +22,14 @@ type Data = {
 	ownUserId: string;
 };
 
+type colData = {
+	// データのプロパティに応じて適切な型を指定してください
+	modified: string;
+	tags: string;
+	userName: string;
+	userIcon: string;
+};
+
 type Commit = {
 	content: string,
 	likes: 0,
@@ -40,6 +48,10 @@ type Commit = {
 type ContentList = {
 	pos: number
 	content: string
+	modified: string;
+	tags: string;
+	userName: string;
+	userIcon: string;
 	selecter: {
 		content: string,
 		likes: number,
@@ -92,83 +104,99 @@ const MyComponent = () => {
 		if (data1) {
 			console.log(data1?.content);
 
-		var contentList: ContentList[]= [];
-		var pos = 0;
+			var contentList: ContentList[] = [];
+			var pos = 0;
 
-		var current = '';
-		data1?.content.split('\n\n').forEach(elem => {
-			// # 
-			if(elem[0] == '#' && elem[1] == ' '){
-				if(current != ''){
-					contentList.push({
-						pos: (Math.floor(pos * 10)) / 10,
-						 content: current,
-						 selecter: [{
+			var current = '';
+			data1?.content.split('\n\n').forEach(elem => {
+				// # 
+				if (elem[0] == '#' && elem[1] == ' ') {
+					if (current != '') {
+						contentList.push({
+							pos: (Math.floor(pos * 10)) / 10,
 							content: current,
-							likes: 0,
+							modified: data1.modified,
+							tags: data1.tags,
 							userName: data1.userName,
 							userIcon: data1.userIcon,
-							modified: data1.modified,
-							tags: '(main)'
-						}]
+							selecter: [{
+								content: current,
+								likes: 0,
+								userName: data1.userName,
+								userIcon: data1.userIcon,
+								modified: data1.modified,
+								tags: '(main)'
+							}]
 						});
-					current = ''
+						current = ''
+					}
+					current = elem;
+					pos += 1
+					pos = Math.floor(pos);
 				}
-				current = elem;
-				pos += 1
-				pos = Math.floor(pos);
-			}
 
-			// ##
-			else if(elem[0] == '#' && elem[1] == '#' && elem[2] == ' '){
-				if(current != ''){
-					contentList.push({pos: (Math.floor(pos * 10)) / 10, content: current,
-					selecter: [{
-						content: current,
-						likes: 0,
-						userName: data1.userName,
-						userIcon: data1.userIcon,
-						modified: data1.modified,
-						tags: '(main)'
-					}]})
-					current = ''
+				// ##
+				else if (elem[0] == '#' && elem[1] == '#' && elem[2] == ' ') {
+					if (current != '') {
+						contentList.push({
+							pos: (Math.floor(pos * 10)) / 10, content: current,
+							modified: data1.modified,
+							tags: data1.tags,
+							userName: data1.userName,
+							userIcon: data1.userIcon,
+							selecter: [{
+								content: current,
+								likes: 0,
+								userName: data1.userName,
+								userIcon: data1.userIcon,
+								modified: data1.modified,
+								tags: '(main)'
+							}]
+						})
+						current = ''
+					}
+					pos += 0.1
+					current = elem;
 				}
-				pos += 0.1
-				current = elem;
-			}
 
-			// その他
-			else{
-				current += '\n\n'+elem
-			}
-		});
-		contentList.push({pos: (Math.floor(pos * 10)) / 10, content: current,
-		selecter: [{
-			content: current,
-			likes: 0,
-			userName: data1.userName,
-			userIcon: data1.userIcon,
-			modified: data1.modified,
-			tags: '(main)'
-		}]});
+				// その他
+				else {
+					current += '\n\n' + elem
+				}
+			});
+			contentList.push({
+				pos: (Math.floor(pos * 10)) / 10, content: current,
+				modified: data1.modified,
+				tags: data1.tags,
+				userName: data1.userName,
+				userIcon: data1.userIcon,
+				selecter: [{
+					content: current,
+					likes: 0,
+					userName: data1.userName,
+					userIcon: data1.userIcon,
+					modified: data1.modified,
+					tags: '(main)'
+				}]
+			});
 
-		setData2(contentList);
-		console.log(commits);
+			setData2(contentList);
+			console.log(commits);
 
-		commits?.forEach(commit => {
-			for (let i = 0; i < contentList.length; i++) {
-				if(commit.articlePos === contentList[i].pos.toString()){
-					contentList[i].selecter.push({
-						content: commit.content,
-						likes: commit.likes,
-						userName: commit.userName,
-						userIcon: commit.userIcon,
-						modified: commit.modified,
-						tags: commit.tags
-					});
-				}	
-			}
-		});
+			commits?.forEach(commit => {
+				for (let i = 0; i < contentList.length; i++) {
+					if (commit.articlePos === contentList[i].pos.toString()) {
+						contentList[i].selecter.push({
+							content: commit.content,
+							likes: commit.likes,
+							userName: commit.userName,
+							userIcon: commit.userIcon,
+							modified: commit.modified,
+							tags: commit.tags
+						});
+					}
+				}
+			});
 		}
 	}, [data1]);
 
@@ -183,21 +211,27 @@ const MyComponent = () => {
 		</div>);
 	} else {
 		return (
-			
+
 			<div>
 				<Sidebar>
-					<div className="flex  mt-6">
-						<img
-							className="object-cover rounded-full h-7 w-7"
-							src={data1.userIcon}
-							alt="avatar"
-						/>
-						<p className="">
-							{data1.userName}
-						</p>
-						<p>
-							{data1.modified}
-						</p>
+					<div>
+						<h1 className="m-5 text-4xl">{ data1.tags }</h1>
+						<div className="ml-10 flex">
+							<img
+								className="object-cover rounded-full h-10 w-10 mr-4"
+								src={data1.userIcon}
+								alt="avatar"
+							/>
+							<div>
+								<p className="">
+								{data1.userName}
+							</p>
+							<p>
+								{data1.modified}
+							</p>
+							</div>
+							
+						</div>
 					</div>
 					<table>
 						{
@@ -205,38 +239,51 @@ const MyComponent = () => {
 								return (
 									<tr>
 										<td><Link href={`/commit?id=${router.query['id']}&pos=${elem.pos}&name=${data1.tags}&owner=${data1.ownUserId}`}>+</Link></td>
+										<td><div className="markdown-body m-5 ">
+											<ReactMarkdown className="p-4">{elem.content}</ReactMarkdown>
+										</div></td>
 										<td>
 											<select onChange={event => {
-												const index:number = parseInt(event.target.value);
+												const index: number = parseInt(event.target.value);
 												var tmp = data2.concat();
 												tmp[i].content = tmp[i].selecter[index].content;
+												tmp[i].userIcon = tmp[i].selecter[index].userIcon;
+												tmp[i].userName = tmp[i].selecter[index].userName;
+												tmp[i].modified = tmp[i].selecter[index].modified;
+
 												setData2(tmp);
 											}}>
 												{
 													elem.selecter.map((op, index) => {
-														return(
+														return (
 															<option value={index}>
-																<div className="flex">
-																	<img className="w-10 h-10" src={op.userIcon} alt="" /><div>{ op.userName }/{ op.tags }</div>
-																</div>
-																<div>
-																{ op.modified } / 
-																</div>
+																{op.tags}
 															</option>
 														);
 													})
 												}
 											</select>
+											<div className="flex">
+												<img className="w-10 h-10 mr-3 rounded-full" src={elem.userIcon} alt="" /><div>
+													<div>
+														{elem.userName}
+													</div>
+													<div>
+													</div>
+													<div>
+														{elem.modified}
+													</div>
+												</div>
+											</div>
+
+
 										</td>
-										<td><div className="markdown-body m-5 ">
-						<ReactMarkdown className="p-4">{elem.content}</ReactMarkdown>
-					</div></td>
 									</tr>
 								);
 							})
 						}
 					</table>
-					
+
 					<div>
 
 
