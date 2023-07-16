@@ -3,7 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 import axios from "axios";
 
@@ -12,7 +12,6 @@ type EditProps = {
 };
 
 const Edit: React.FC<EditProps> = ({ onClick }) => {
-
   const { data: session } = useSession();
 
   const [markdownText, setMarkdownText] = useState("");
@@ -31,12 +30,14 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
   return (
     <div>
       <section className="container px-4 mx-auto">
-        <div className="-mx-5 font-bold text-xl">新しい記事の作成</div>
+        <div className="-mx-5 font-bold text-xl text-gray-600">
+          新しい記事の作成
+        </div>
         <div className="flex flex-col mt-6">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <label
               htmlFor="input-label"
-              className="block text-sm font-bold mb-1 ml-2"
+              className="block text-sm font-bold mb-1 ml-2 text-gray-600"
             >
               タイトル
             </label>
@@ -68,7 +69,7 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
             </div>
             <div className="flex justify-end">
               <button
-                className="m-1 mt-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                className="m-1 mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-full"
                 onClick={() => {
                   console.log("下書き保存.");
                 }}
@@ -76,7 +77,7 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
                 下書き保存
               </button>
               <button
-                className="m-1 mt-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                className="m-1 mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-full"
                 onClick={() => {
                   axios
                     .post("article", {
@@ -85,15 +86,14 @@ const Edit: React.FC<EditProps> = ({ onClick }) => {
                       isPublic: true,
                       tags: titileText,
                       userName: session?.user?.name,
-                      userIcon: session?.user?.image
+                      userIcon: session?.user?.image,
                     })
                     .then((res) => {
                       console.log(res.data);
                     });
-                    router.push('/');
-                    alert('記事を投稿しました。')
+                  router.push("/");
+                  alert("記事を投稿しました。");
                 }}
-                
               >
                 投稿
               </button>
