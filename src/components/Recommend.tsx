@@ -75,7 +75,7 @@ const Recommend: React.FC<EditProps> = () => {
         最新の記事
       </div>
       {
-        data1.map(content => {
+        data2.map(content => {
           return(
             <div>
               <Listitem
