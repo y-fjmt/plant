@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 import Listitem from "./Listitem";
 
 import axios from "axios";
-import { data } from 'autoprefixer';
+import { data } from "autoprefixer";
 
-
-type EditProps = {
-};
+type EditProps = {};
 
 type Data = {
   // データのプロパティに応じて適切な型を指定してください
   modified: string;
-	articleId: string;
-	tags: string;
-	userName: string;
-	userIcon: string;
-  likes: number
+  articleId: string;
+  tags: string;
+  userName: string;
+  userIcon: string;
+  likes: number;
 };
 
 const Recommend: React.FC<EditProps> = () => {
-
   const { data: session } = useSession();
 
   const [data1, setData1] = useState<Data[]>([]);
@@ -30,12 +27,12 @@ const Recommend: React.FC<EditProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get('/article/search', {
+        const response1 = await axios.get("/article/search", {
           params: {
-            userId: session?.user?.email
-          }
+            userId: session?.user?.email,
+          },
         });
-        const response2 = await axios.get('/article/search');
+        const response2 = await axios.get("/article/search");
 
         setData1(response1.data);
         setData2(response2.data);
@@ -53,42 +50,36 @@ const Recommend: React.FC<EditProps> = () => {
   }
   return (
     <div>
-      <div>
-        あなたの記事
-      </div>
-      {
-        data1.map(content => {
-          return(
-            <div>
-              <Listitem
-                img={content.userIcon}
-                title={content.tags}
-                auther={content.userName}
-                articleId={content.articleId}
-                likes={content.likes}
-               />
-            </div>
-          );
-        })
-      }
-      <div>
+      <div className="mx-3 font-bold text-xl text-gray-600">あなたの記事</div>
+      {data1.map((content) => {
+        return (
+          <div>
+            <Listitem
+              img={content.userIcon}
+              title={content.tags}
+              auther={content.userName}
+              articleId={content.articleId}
+              likes={content.likes}
+            />
+          </div>
+        );
+      })}
+      <div className="mx-3 mt-4 font-bold text-xl text-gray-600">
         最新の記事
       </div>
-      {
-        data2.map(content => {
-          return(
-            <div>
-              <Listitem
-                img={content.userIcon}
-                title={content.tags}
-                auther={content.userName}
-                articleId={content.articleId}
-                likes={content.likes}
-               />
-            </div>
-          );
-        })
-      }
+      {data2.map((content) => {
+        return (
+          <div>
+            <Listitem
+              img={content.userIcon}
+              title={content.tags}
+              auther={content.userName}
+              articleId={content.articleId}
+              likes={content.likes}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
