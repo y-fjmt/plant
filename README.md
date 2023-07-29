@@ -1,4 +1,16 @@
-# Plant
+# Plant -記事を育てるプラットフォーム-
+![サンプル画面](.README/sample.png)
+## Feature
+- マークダウンで記事をかける
+- 誰でも自分の環境やバージョンに合った記事を追記できる
+
+## 仕様技術
+<img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=plastic">
+<img src="https://img.shields.io/badge/-React-61DAFB.svg?logo=react&style=plastic">
+<img src="https://img.shields.io/badge/-Typescript-007ACC.svg?logo=typescript&style=plastic">
+<img src="https://img.shields.io/badge/-Python-3776AB.svg?logo=python&style=plastic">
+<img src="https://img.shields.io/badge/-Amazon%20aws-232F3E.svg?logo=amazon-aws&style=plastic">
+<img src="https://img.shields.io/badge/-Figma-F24E1E.svg?logo=figma&style=plastic">
 
 ## デプロイリンク
 ブロントエンドのデプロイはAWS Amplifyで行っている。
